@@ -89,8 +89,9 @@
         ```
     * Initiate the ELK server by hitting `sudo docker-compose up -d`. To terminate the server operation, hit `sudo docker-compose down -v` instead.
     <img src="./_readme_asset/docker_compose.png">
+    
     * Complete ELK Client setup
-    * Open a web browser in ELK server and access **`localhost:5601`**. Head to `Kibana > Index patterns` and setup the GUI management panel. Define index pattern, and find the fields. You can customize the setting, add more things on the pipeline, or build a new fancy GUI panel. Creative parts are on your hands!
+    * Open a web browser in the ELK server and access **`localhost:5601`**. Head to `Kibana > Index patterns` and set up the GUI management panel. Define the index pattern, and find the fields. You can customize the setting, add more things to the pipeline, or build a new fancy GUI panel. Creative parts are on your hands!
         * <img src="./_readme_asset/kibana_run_1.png">
         * <img src="./_readme_asset/kibana_run_1b.png">
         * <img src="./_readme_asset/kibana_run_2.png">
@@ -109,11 +110,13 @@
     https://www.elastic.co/downloads/past-releases/winlogbeat-7-1-1
     ```
     * Test an ICMP connectivity(`ping`) between ELK servers and ELK clients. You can consider disabling the Windows firewall that blocks communications while the machines are part of the ELK stack.
-    <img src="./_readme_asset/disable_firewalls_win10.png"> 
+    <img src="./_readme_asset/disable_firewalls_win10.png">
+
     * Initiate sysmon. If you don't have any XML sysmon rule, you can download and use `sysmonconfig-export.yml` file as the default for sysmon. And, execute the sysmon service. (`.\sysmon.exe --accepteula`, `.\sysmon.exe -i <path_to>\sysmonconfig-export.xml`...)
     ```
     https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml
     ```
+    
     * Save the **winlogbeat** configuration with below content(**IP address/Port number should be matches with ELK server.**) file as `winlogbeat.yml` at the right directory of **winlogbeat**.
     ```yml
     winlogbeat.event_logs:
