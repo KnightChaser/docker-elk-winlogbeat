@@ -12,7 +12,7 @@
 - ELK Server(Management server); Ubuntu 22.04.6 LTS, 64bits
 - ELK Client(Windows endpoint); Windows 10 Home, 64bits
 - ELK stack version `7.1.1`(Elasticsearch, Logstash, Kibana + winlogbeats)
-- Both server and client are interconnected in VMWare virtualization environment, network configured as NAT(Network Address Translation) mode.
+- Both server and client are interconnected in the VMWare virtualization environment, a network configured as NAT(Network Address Translation) mode.
 
 ### **Overall mechanism**
 <img src="./_readme_asset/elk_stack_diagram.png">
@@ -69,8 +69,8 @@
         http.host: "0.0.0.0"
         xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
         ```
-        * `logstash/pipeline/logstash.conf` is for Logstash pipelining configuration connected to any preconfigured Windows endpoint(from winlogbeat). `port` setting in `input` should be corresponded to both `docker-compose.yml` and winlogbeat YML setting file in Windows endpoint. `hosts` in `output` section describes Elasticsearch connection information. This information should be identical to `docker-compose.yml`. Other configurations may be adjusted for your needs(For parsing, indexing, transforming data during the pipelining procedure.).
-        ```json
+        * `logstash/pipeline/logstash.conf` is for the Logstash pipelining configuration connected to any pre-configured Windows endpoint(from winlogbeat). `port` setting in `input` should correspond to both `docker-compose.yml` and winlogbeat YML setting file in Windows endpoint. `hosts` in `output` section describes Elasticsearch connection information. This information should be identical to `docker-compose.yml`. Other configurations may be adjusted for your needs(For parsing, indexing, transforming data during the pipelining procedure.).
+        ```
         input {
             beats{
                 port => 5000
@@ -104,13 +104,13 @@
     ```
     https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
     ```
-    * Download the **winlogbeat** with version of `7.1.1`. (Because ELK stack is configured as version of `7.1.1`, matching the overall version is highly encouraged.)
+    * Download the **winlogbeat** with version of `7.1.1`. (Because ELK stack is configured as the version of `7.1.1`, matching the overall version is highly encouraged.)
     ```
     https://www.elastic.co/downloads/past-releases/winlogbeat-7-1-1
     ```
-    * Test an ICMP connectivity(`ping`) between ELK servers and ELK clients. You can consider disabling Windows firewall that blocks the communications during the machines are part of the ELK stack.
+    * Test an ICMP connectivity(`ping`) between ELK servers and ELK clients. You can consider disabling the Windows firewall that blocks communications while the machines are part of the ELK stack.
     <img src="./_readme_asset/disable_firewalls_win10.png"> 
-    * Initiate sysmon. If you don't have any XML sysmon rule, you can download and use `sysmonconfig-export.yml` file as default for sysmon. And, execute the sysmon service. (`.\sysmon.exe --accepteula`, `.\sysmon.exe -i <path_to>\sysmonconfig-export.xml`...)
+    * Initiate sysmon. If you don't have any XML sysmon rule, you can download and use `sysmonconfig-export.yml` file as the default for sysmon. And, execute the sysmon service. (`.\sysmon.exe --accepteula`, `.\sysmon.exe -i <path_to>\sysmonconfig-export.xml`...)
     ```
     https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml
     ```
